@@ -781,21 +781,77 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch">
-                <div class="bg-body border border-border rounded-3xl p-6 sm:p-7 text-center flex flex-col justify-between h-full">
-                    <p class="text-5xl font-extrabold text-accent/20 leading-none mb-4 tracking-tighter">!</p>
-                    <h3 class="text-base font-bold mb-2" style="color: var(--text-primary);">Water Stains on Ceilings</h3>
-                    <p class="text-sm text-secondary leading-relaxed">Often a sign of active roof or plumbing leaks — sometimes painted over before listing.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch">
+                <!-- Red Flag 1 -->
+                <div class="bg-body border border-border rounded-3xl overflow-hidden flex flex-col justify-between h-full hover:border-accent/40 transition-all shadow-sm group">
+                    <div class="relative h-44 overflow-hidden">
+                        <img src="assets/q5.jpg"
+                             alt="Roof and water stain inspection finding"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <span class="absolute top-3.5 left-3.5 bg-red-500 text-white text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1">
+                            <i class="fas fa-triangle-exclamation text-[10px]"></i> Critical Flaw
+                        </span>
+                    </div>
+                    <div class="p-6 text-left flex flex-col flex-1 justify-between">
+                        <div>
+                            <h3 class="text-base font-bold mb-2" style="color: var(--text-primary);">Water Stains on Ceilings</h3>
+                            <p class="text-xs sm:text-sm text-secondary leading-relaxed mb-4">Often a sign of active roof or plumbing leaks — frequently painted over prior to listing without resolving moisture sources.</p>
+                        </div>
+                        <div class="pt-3 border-t border-border flex items-center justify-between text-[11px] font-semibold text-secondary mt-auto">
+                            <span>Diagnostic Risk</span>
+                            <span class="text-red-500 font-bold">$3K - $12K Repair</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-body border border-border rounded-3xl p-6 sm:p-7 text-center flex flex-col justify-between h-full">
-                    <p class="text-5xl font-extrabold text-accent/20 leading-none mb-4 tracking-tighter">!</p>
-                    <h3 class="text-base font-bold mb-2" style="color: var(--text-primary);">Hairline Foundation Cracks</h3>
-                    <p class="text-sm text-secondary leading-relaxed">Some cracks are cosmetic. Others signal structural movement that could cost $10k+.</p>
+
+                <!-- Red Flag 2 -->
+                <div class="bg-body border border-border rounded-3xl overflow-hidden flex flex-col justify-between h-full hover:border-accent/40 transition-all shadow-sm group">
+                    <div class="relative h-44 overflow-hidden">
+                        <img src="assets/q1.jpg"
+                             alt="Foundation structural cracks inspection finding"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <span class="absolute top-3.5 left-3.5 bg-red-500 text-white text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1">
+                            <i class="fas fa-triangle-exclamation text-[10px]"></i> Critical Flaw
+                        </span>
+                    </div>
+                    <div class="p-6 text-left flex flex-col flex-1 justify-between">
+                        <div>
+                            <h3 class="text-base font-bold mb-2" style="color: var(--text-primary);">Hairline Foundation Cracks</h3>
+                            <p class="text-xs sm:text-sm text-secondary leading-relaxed mb-4">Some cracks are cosmetic settlement. Others signal active slab deflection and soil shifting that could cost upwards of $10K+.</p>
+                        </div>
+                        <div class="pt-3 border-t border-border flex items-center justify-between text-[11px] font-semibold text-secondary mt-auto">
+                            <span>Diagnostic Risk</span>
+                            <span class="text-red-500 font-bold">Laser Level Tested</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-body border border-border rounded-3xl p-6 sm:p-7 text-center flex flex-col justify-between h-full">
-                    <p class="text-5xl font-extrabold text-accent/20 leading-none mb-4 tracking-tighter">!</p>
-                    <h3 class="text-base font-bold mb-2" style="color: var(--text-primary);">Old Electrical Panels</h3>
-                    <p class="text-sm text-secondary leading-relaxed">Certain federal Pacific and Zinsco panels are known fire hazards — often hidden behind doors.</p>
+
+                <!-- Red Flag 3 -->
+                <div class="bg-body border border-border rounded-3xl overflow-hidden flex flex-col justify-between h-full hover:border-accent/40 transition-all shadow-sm group">
+                    <div class="relative h-44 overflow-hidden">
+                        <img src="assets/q2.jpg"
+                             alt="Outdated electrical panel fire hazard finding"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <span class="absolute top-3.5 left-3.5 bg-red-500 text-white text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1">
+                            <i class="fas fa-triangle-exclamation text-[10px]"></i> Critical Flaw
+                        </span>
+                    </div>
+                    <div class="p-6 text-left flex flex-col flex-1 justify-between">
+                        <div>
+                            <h3 class="text-base font-bold mb-2" style="color: var(--text-primary);">Old Electrical Panels</h3>
+                            <p class="text-xs sm:text-sm text-secondary leading-relaxed mb-4">Certain Federal Pacific and Zinsco panels fail breaker trips, presenting fire hazards that insurers routinely refuse to bind.</p>
+                        </div>
+                        <div class="pt-3 border-t border-border flex items-center justify-between text-[11px] font-semibold text-secondary mt-auto">
+                            <span>Diagnostic Risk</span>
+                            <span class="text-red-500 font-bold">Uninsurable Risk</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
