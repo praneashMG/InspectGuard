@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+
+<head>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="icon" type="image/png" href="assets/fav.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>InspectGuard | Home Inspection & Pre-Purchase Assessment</title>
+    <!-- Tailwind + FontAwesome -->
+    <script src="tailwind.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        /* ========== THEME VARIABLES (Home Inspection & Pre-Purchase Assessment) ========== */
+        :root,
+        html[data-theme='light'] {
+            --bg-body: #F8FAFC;
+            --text-primary: #0F172A;
+            --text-secondary: #334155;
+            --accent: #0D9488;
+            --accent-dark: #0F766E;
+            --primary: #1E3A8A;
+            --card-bg: #FFFFFF;
+            --border-light: #E2E8F0;
+            --hover-bg: #F0FDFA;
+            --footer-bg: #0B192C;
+            --footer-text: #E2E8F0;
+            --rating-star: #F59E0B;
+        }
+
+        html[data-theme='dark'] {
+            --bg-body: #0A0F1D;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --accent: #14B8A6;
+            --accent-dark: #0D9488;
+            --primary: #3B82F6;
+            --card-bg: #131E32;
+            --border-light: #1E293B;
+            --hover-bg: #1E2D4A;
+            --footer-bg: #060B14;
+            --footer-text: #CBD5E1;
+            --rating-star: #FBBF24;
+        }
+
+        body {
+            background: var(--bg-body);
+            color: var(--text-primary);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            transition: background-color 0.25s ease, color 0.2s;
+            overflow-x: hidden;
+        }
+
+        .text-accent {
+            color: var(--accent);
+        }
+
+        .bg-accent {
+            background-color: var(--accent);
+        }
+
+        .border-accent {
+            border-color: var(--accent);
+        }
+
+        .hover\:bg-accent\/10:hover {
+            background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+        }
+
+        .bg-card {
+            background-color: var(--card-bg);
+        }
+
+        .text-secondary {
+            color: var(--text-secondary);
+        }
+
+        .border-border {
+            border-color: var(--border-light);
+        }
+
+        /* Navbar + glassmorphic */
+        #main-header nav {
+            background: var(--card-bg);
+            backdrop-filter: blur(0px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        html[data-theme='dark'] #main-header nav {
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(4px);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+
+        .nav-link.active {
+            color: var(--accent);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: 0.2s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Dropdown style */
+        .dropdown-wrapper {
+            position: relative;
+        }
+
+        .dropdown-wrapper .dropdown-toggle {
+            display: inline-flex;
+            align-items: center;
+            vertical-align: middle;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px);
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 0.75rem;
+            min-width: 190px;
+            padding: 0.4rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            z-index: 100;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .dropdown-wrapper.open .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .dropdown-menu a {
+            display: flex;
+            align-items: center;
+            padding: 0.6rem 1rem;
+            color: var(--text-primary);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--hover-bg);
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        /* Tire comparison cards */
+        .tire-card {
+            transition: all 0.2s;
+            background: var(--card-bg);
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+        }
+
+        .tire-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border-radius: 9999px;
+            transition: 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: scale(1.02);
+        }
+
+        .btn-outline {
+            border: 1.5px solid var(--accent);
+            color: var(--accent);
+            border-radius: 9999px;
+            background: transparent;
+            transition: 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .rating-star {
+            color: var(--rating-star);
+        }
+
+        .status-badge {
+            background: #10b98120;
+            color: #10b981;
+            border-radius: 999px;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .vehicle-track {
+            background: var(--card-bg);
+            border-left: 4px solid var(--accent);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.7s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        button:focus,
+        .dropdown-toggle:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .dropdown-toggle {
+            -webkit-appearance: none;
+            appearance: none;
+            border: none;
+            background: transparent;
+        }
+
+        @media (max-width: 1279px) {
+            .dropdown-menu {
+                position: static;
+                display: none;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                margin-top: 0.5rem;
+            }
+
+            .dropdown-wrapper.open .dropdown-menu {
+                display: block;
+            }
+        }
+
+        /* Mobile Drawer Link Hover & Active Underlines */
+        #mobile-drawer nav a:not(.rounded-full) {
+            position: relative;
+            transition: color 0.2s ease;
+            width: fit-content;
+        }
+
+        #mobile-drawer nav a.active:not(.rounded-full) {
+            color: var(--accent) !important;
+        }
+
+        #mobile-drawer nav a:not(.rounded-full)::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.2s ease;
+        }
+
+        #mobile-drawer nav a:not(.rounded-full):hover::after {
+            width: 100%;
+        }
+
+        /* RTL support for navigation spacing, underlines and menus */
+        html[dir="rtl"] #main-header .space-x-8 > :not([hidden]) ~ :not([hidden]) {
+            margin-right: 2rem !important;
+            margin-left: 0 !important;
+        }
+        html[dir="rtl"] .dropdown-menu {
+            left: 50%;
+            right: auto;
+        }
+        html[dir="rtl"] .dropdown-menu a:hover {
+            transform: translateX(-4px);
+        }
+        html[dir="rtl"] .hover\:translate-x-1:hover {
+            transform: translateX(-0.25rem) !important;
+        }
+        html[dir="rtl"] .nav-link::after {
+            left: auto;
+            right: 0;
+        }
+        html[dir="rtl"] #mobile-drawer nav a:not(.rounded-full)::after {
+            left: auto;
+            right: 0;
+        }
+    </style>
+    <style id="typography-alignment">
+        /* Typography Alignment & Consistency Overrides */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 500 !important;
+        }
+        /* Keep paragraph weights 400-500 */
+        p:not(.font-medium), div.text-secondary {
+            font-weight: 400 !important;
+        }
+        /* Ensure proper text alignment inside cards */
+        .tire-card, .bg-card, .card {
+            text-align: left !important;
+        }
+        .text-center .tire-card, .text-center .bg-card {
+            text-align: left !important;
+        }
+        /* Reduce overly wide paragraphs inside containers for readability */
+        .container p, section > div > p.text-secondary {
+            max-width: 65ch;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .tire-card p, .bg-card p, .card p, .text-left p {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            max-width: none !important;
+        }
+    </style>
+    <style id="cta-improvements">
+        /* Primary CTA Highlights */
+        .btn-primary {
+            box-shadow: 0 4px 12px 0 rgba(13, 148, 136, 0.35);
+            color: #ffffff !important;
+        }
+        html[data-theme='dark'] .btn-primary {
+            box-shadow: 0 4px 12px 0 rgba(20, 184, 166, 0.3);
+            color: #042f2e !important; /* High contrast in dark mode */
+            font-weight: 600 !important;
+        }
+        
+        /* Hover Color Consistency & Contrast */
+        .btn-primary:hover {
+            background-color: var(--accent-dark) !important;
+            transform: translateY(-1px) scale(1.02);
+            box-shadow: 0 6px 16px 0 rgba(13, 148, 136, 0.45);
+        }
+        html[data-theme='dark'] .btn-primary:hover {
+            box-shadow: 0 6px 16px 0 rgba(20, 184, 166, 0.4);
+        }
+        
+        .btn-outline {
+            color: var(--accent) !important;
+            border-color: var(--accent) !important;
+        }
+        .btn-outline:hover {
+            background-color: var(--accent) !important;
+            color: #ffffff !important;
+            transform: translateY(-1px);
+        }
+        html[data-theme='dark'] .btn-outline:hover {
+            color: #0f172a !important; /* High contrast in dark mode */
+        }
+
+        /* Align CTA buttons consistently inside cards/grids */
+        .tire-card, .dashboard-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            gap: 1.25rem;
+        }
+        .tire-card > div:last-child, .dashboard-card > div:last-child, .dashboard-card > button:last-child {
+            margin-top: auto;
+        }
+    </style>
+    <style id="image-improvements">
+        /* Prevent image distortion globally */
+        img:not([src*="fav.png"]):not(.object-contain) {
+            object-fit: cover !important;
+        }
+        
+        /* Ensure proper background overlays for readability (apply to containers if needed) */
+        .bg-overlay {
+            position: relative;
+        }
+        .bg-overlay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.95) 100%);
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .bg-overlay > *:not(img) {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+    <style id="responsive-fixes">
+        /* Guarantee text wrapping on general elements, but keep nav & brand clean */
+        body {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+        #main-header nav, #main-header .nav-link, #main-header a {
+            white-space: nowrap !important;
+            word-break: keep-all !important;
+            overflow-wrap: normal !important;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Fixed Header -->
+    <header class="fixed top-0 left-0 w-full z-50 pt-3" id="main-header">
+        <nav
+            class="max-w-[96rem] mx-auto px-4 md:px-6 py-3 rounded-2xl flex items-center justify-between backdrop-blur-md border border-border shadow-lg">
+            <!-- Brand Logo -->
+            <a href="index.html" class="flex-shrink-0 inline-flex items-center gap-2.5 sm:gap-3 text-xl font-bold tracking-tight text-accent hover:opacity-90 transition-opacity" style="font-weight: 700 !important;">
+                <span class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-accent text-white flex items-center justify-center shadow-md shadow-accent/25 flex-shrink-0">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <path d="m9 12 2 2 4-4"></path>
+                    </svg>
+                </span>
+                <span class="whitespace-nowrap tracking-tight font-extrabold text-lg sm:text-xl text-accent">
+                    InspectGuard
+                </span>
+            </a>
+
+            <!-- Desktop Center Nav -->
+            <div class="hidden xl:flex items-center gap-6 2xl:gap-8 rtl:space-x-reverse text-sm font-medium whitespace-nowrap">
+                <div class="dropdown-wrapper">
+                    <button class="nav-link dropdown-toggle inline-flex items-center gap-1.5 whitespace-nowrap">
+                        <span class="leading-none">Home</span>
+                        <i class="fas fa-chevron-down text-[10px] opacity-70 translate-y-[1px]"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="index.html">Home 1</a>
+                        <a href="home2.html">Home 2</a>
+                    </div>
+                </div>
+                <a href="about.html" class="nav-link whitespace-nowrap">About</a>
+                <a href="service.html" class="nav-link whitespace-nowrap">Services</a>
+                <a href="pre-purchase.html" class="nav-link whitespace-nowrap">Assessment</a>
+                <a href="checklist.html" class="nav-link whitespace-nowrap">Reports</a>
+                <a href="pricing.html" class="nav-link whitespace-nowrap">Pricing</a>
+                <a href="contact.html" class="nav-link whitespace-nowrap">Contact</a>
+                <div class="dropdown-wrapper">
+                    <button class="nav-link dropdown-toggle inline-flex items-center gap-1.5 whitespace-nowrap">
+                        <span class="leading-none">Dashboard</span>
+                        <i class="fas fa-chevron-down text-[10px] opacity-70 translate-y-[1px]"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="admin.html">Admin Dashboard</a>
+                        <a href="user.html">User Dashboard</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="hidden xl:flex items-center gap-3 whitespace-nowrap flex-shrink-0">
+                <a href="login.html" class="btn-outline px-4 py-2 text-sm font-medium inline-flex items-center gap-1.5 whitespace-nowrap">
+                    <i class="fas fa-sign-in-alt text-xs"></i> <span>Login</span>
+                </a>
+                <a href="signup.html" class="btn-primary px-4 py-2 text-sm font-medium inline-flex items-center gap-1.5 whitespace-nowrap">
+                    <i class="fas fa-user-plus text-xs"></i> <span>Signup</span>
+                </a>
+                <div class="flex items-center border-l border-border pl-2 gap-1">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-accent/10 transition-colors" title="Toggle theme">
+                        <i class="fas fa-moon light-icon text-sm"></i>
+                        <i class="fas fa-sun dark-icon hidden text-sm"></i>
+                    </button>
+                    <button id="lang-icon" class="p-2 rounded-full hover:bg-accent/10 transition-colors" title="Toggle RTL">
+                        <i class="fas fa-exchange-alt text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tablet / Mobile Hamburger and Quick Controls -->
+            <div class="xl:hidden flex items-center gap-2">
+                <button id="mobile-theme-header-btn" class="p-2 rounded-full hover:bg-accent/10 transition-colors text-accent">
+                    <i class="fas fa-moon light-icon text-sm"></i>
+                    <i class="fas fa-sun dark-icon hidden text-sm"></i>
+                </button>
+                <button id="mobile-menu-open" class="p-2 rounded-xl border border-border hover:bg-accent/10 text-accent transition-colors">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-drawer" class="fixed inset-0 z-50 pointer-events-none transition-all duration-300">
+        <div id="drawer-backdrop" class="absolute inset-0 bg-black/50 opacity-0 transition pointer-events-none"></div>
+        <div id="drawer-panel"
+            class="absolute top-0 left-0 w-80 h-full bg-card shadow-2xl transform -translate-x-full transition-transform duration-300 p-6 overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-border pb-4">
+                <a href="index.html" class="inline-flex items-center gap-2.5 text-xl font-bold tracking-tight text-accent" style="font-weight: 700 !important; color: var(--accent) !important;">
+                    <span class="w-9 h-9 rounded-xl bg-accent text-white flex items-center justify-center shadow-md shadow-accent/25">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <path d="m9 12 2 2 4-4"></path>
+                        </svg>
+                    </span>
+                    <span class="tracking-tight font-extrabold text-accent">
+                        InspectGuard
+                    </span>
+                </a>
+                <button id="drawer-close"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <nav class="flex flex-col gap-3 mt-6">
+                <div><button id="mobile-home-toggle"
+                        class="flex w-full justify-between items-center py-2 font-medium">Home <i
+                            class="fas fa-chevron-down text-xs"></i></button>
+                    <div id="mobile-home-submenu" class="pl-4 flex flex-col gap-2 mt-1 border-l border-border hidden">
+                        <a href="index.html">Home 1</a><a href="home2.html">Home 2</a>
+                    </div>
+                </div>
+                <a href="about.html" class="py-2 font-medium">About</a>
+                <a href="service.html" class="py-2 font-medium">Services</a>
+                <a href="pre-purchase.html" class="py-2 font-medium">Assessment</a>
+                <a href="checklist.html" class="py-2 font-medium">Reports</a>
+                <a href="pricing.html" class="py-2 font-medium">Pricing</a>
+                <a href="contact.html" class="py-2 font-medium">Contact</a>
+                <div><button id="mobile-dashboard-toggle"
+                        class="flex w-full justify-between items-center py-2 font-medium">Dashboard <i
+                            class="fas fa-chevron-down text-xs"></i></button>
+                    <div id="mobile-dashboard-submenu"
+                        class="hidden pl-4 flex flex-col gap-2 mt-1 border-l border-border">
+                        <a href="admin.html">Admin Dashboard</a><a href="user.html">User Dashboard</a>
+                    </div>
+                </div>
+                <div class="pt-4 border-t border-border flex gap-3 mt-4">
+                    <a href="login.html"
+                        class="flex-1 text-center border border-accent rounded-full py-2 text-accent"><i
+                            class="fas fa-key mr-1"></i> Login</a>
+                    <a href="signup.html" class="flex-1 text-center bg-accent rounded-full py-2 text-white"><i
+                            class="fas fa-user-plus mr-1"></i> Signup</a>
+                </div>
+                <div class="flex justify-around mt-6 pt-2"><button id="mobile-theme-btn" class="p-2"><i
+                            class="fas fa-moon"></i> Theme</button><button id="mobile-rtl-btn" class="p-2"><i
+                            class="fas fa-exchange-alt"></i> RTL</button></div>
+            </nav>
+        </div>
+    </div>
+
+
+<main class="pt-28">
+
+    <!-- ============================================================
+         SECTION 1: HERO — Centered content over background image
+         ============================================================ -->
+    <section class="relative max-w-[96rem] mx-auto px-4 md:px-6 pb-12 md:pb-16">
+        <div class="relative rounded-[2rem] overflow-hidden min-h-[380px] sm:min-h-[440px] md:min-h-[480px] flex items-center justify-center">
+            <img src="assets/re.jpg"
+                 alt="Residential property ready for professional inspection"
+                 class="absolute inset-0 w-full h-full object-cover"
+                 loading="eager">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/55 to-black/85"></div>
+            <div class="absolute inset-0 opacity-[0.04]">
+                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <pattern id="svcHeroGrid" width="5" height="5" patternUnits="userSpaceOnUse">
+                        <path d="M 5 0 L 0 0 0 5" fill="none" stroke="white" stroke-width="0.25"/>
+                    </pattern>
+                    <rect width="100" height="100" fill="url(#svcHeroGrid)"/>
+                </svg>
+            </div>
+
+            <div class="relative z-10 text-center px-6 py-10 sm:py-12 md:py-14 max-w-3xl mx-auto">
+                <div class="inline-flex items-center gap-3 mb-7">
+                    <span class="h-px w-10 bg-accent"></span>
+                    <span class="text-accent text-[10px] font-bold tracking-[0.4em] uppercase">Our Services</span>
+                    <span class="h-px w-10 bg-accent"></span>
+                </div>
+                <h1 class="text-[2.2rem] leading-[1.06] sm:text-5xl md:text-[3.6rem] font-extrabold tracking-[-0.02em] text-white mb-7">
+                    Every Inspection.<br>
+                    <span class="italic font-light text-accent" style="font-family: Georgia, 'Times New Roman', serif;">One Standard.</span>
+                </h1>
+                <p class="text-white/75 text-sm sm:text-base leading-relaxed mb-7 max-w-xl mx-auto">
+                    Whether you're buying, selling, or protecting an existing home, our certified assessments give you the full picture — documented, prioritized, and delivered fast.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <a href="contact.html" class="btn-primary px-8 py-3.5 text-sm font-semibold inline-flex items-center justify-center w-full sm:w-auto">
+                        Book an Inspection
+                    </a>
+                    <a href="pricing.html" class="bg-white/10 backdrop-blur-sm border border-white/30 text-white px-8 py-3.5 rounded-full text-sm font-semibold inline-flex items-center justify-center hover:bg-white/20 transition-colors w-full sm:w-auto">
+                        View Pricing
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: SERVICE LIST — Editorial numbered rows with hover image
+         ============================================================ -->
+    <section class="py-20 md:py-32" style="background: var(--card-bg);">
+        <div class="max-w-[96rem] mx-auto px-4 md:px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 md:mb-24">
+                <div class="inline-flex items-center gap-3 mb-6 justify-center">
+                    <span class="h-px w-10 bg-accent"></span>
+                    <span class="text-accent text-[10px] font-bold tracking-[0.4em] uppercase">Core Services</span>
+                    <span class="h-px w-10 bg-accent"></span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="color: var(--text-primary);">Choose the Right Assessment</h2>
+                <p class="text-secondary text-sm sm:text-base leading-relaxed">
+                    Four core services — each built around a different stage of the homeownership journey.
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <!-- Service row 1 -->
+                <a href="pre-purchase.html" class="group grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 items-center py-8 border-t border-border hover:border-accent/60 transition-colors">
+                    <div class="sm:col-span-2 text-center sm:text-left">
+                        <span class="text-4xl sm:text-5xl font-extrabold text-accent/20 group-hover:text-accent transition-colors leading-none tracking-tighter">01</span>
+                    </div>
+                    <div class="sm:col-span-7 text-center sm:text-left">
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 group-hover:text-accent transition-colors" style="color: var(--text-primary);">Pre-Purchase Inspection</h3>
+                        <p class="text-sm text-secondary leading-relaxed">A complete top-to-bottom assessment before you commit. The most important report you'll ever read.</p>
+                    </div>
+                    <div class="sm:col-span-3 flex items-center justify-center sm:justify-end gap-2 text-xs font-semibold text-accent uppercase tracking-wider">
+                        Explore <span class="text-lg leading-none group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
+                </a>
+                <!-- Service row 2 -->
+                <a href="service.html" class="group grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 items-center py-8 border-t border-border hover:border-accent/60 transition-colors">
+                    <div class="sm:col-span-2 text-center sm:text-left">
+                        <span class="text-4xl sm:text-5xl font-extrabold text-accent/20 group-hover:text-accent transition-colors leading-none tracking-tighter">02</span>
+                    </div>
+                    <div class="sm:col-span-7 text-center sm:text-left">
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 group-hover:text-accent transition-colors" style="color: var(--text-primary);">Pre-Listing Inspection</h3>
+                        <p class="text-sm text-secondary leading-relaxed">Sell with confidence. Identify issues before buyers do and close faster with fewer negotiation surprises.</p>
+                    </div>
+                    <div class="sm:col-span-3 flex items-center justify-center sm:justify-end gap-2 text-xs font-semibold text-accent uppercase tracking-wider">
+                        Explore <span class="text-lg leading-none group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
+                </a>
+                <!-- Service row 3 -->
+                <a href="service.html" class="group grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 items-center py-8 border-t border-border hover:border-accent/60 transition-colors">
+                    <div class="sm:col-span-2 text-center sm:text-left">
+                        <span class="text-4xl sm:text-5xl font-extrabold text-accent/20 group-hover:text-accent transition-colors leading-none tracking-tighter">03</span>
+                    </div>
+                    <div class="sm:col-span-7 text-center sm:text-left">
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 group-hover:text-accent transition-colors" style="color: var(--text-primary);">Thermal Imaging</h3>
+                        <p class="text-sm text-secondary leading-relaxed">Infrared scans that reveal hidden moisture, insulation gaps, and electrical hot spots — invisible to the naked eye.</p>
+                    </div>
+                    <div class="sm:col-span-3 flex items-center justify-center sm:justify-end gap-2 text-xs font-semibold text-accent uppercase tracking-wider">
+                        Explore <span class="text-lg leading-none group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
+                </a>
+                <!-- Service row 4 -->
+                <a href="service.html" class="group grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 items-center py-8 border-y border-border hover:border-accent/60 transition-colors">
+                    <div class="sm:col-span-2 text-center sm:text-left">
+                        <span class="text-4xl sm:text-5xl font-extrabold text-accent/20 group-hover:text-accent transition-colors leading-none tracking-tighter">04</span>
+                    </div>
+                    <div class="sm:col-span-7 text-center sm:text-left">
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 group-hover:text-accent transition-colors" style="color: var(--text-primary);">Maintenance Inspection</h3>
+                        <p class="text-sm text-secondary leading-relaxed">For existing homeowners — periodic check-ups that catch small issues before they become expensive repairs.</p>
+                    </div>
+                    <div class="sm:col-span-3 flex items-center justify-center sm:justify-end gap-2 text-xs font-semibold text-accent uppercase tracking-wider">
+                        Explore <span class="text-lg leading-none group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: WHAT'S COVERED — Split image + accent-colored checklist
+         ============================================================ -->
+    <section class="py-20 md:py-32">
+        <div class="max-w-[96rem] mx-auto px-4 md:px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-6xl mx-auto">
+                <!-- Left: image with overlapping accent bar -->
+                <div class="relative order-2 lg:order-1">
+                    <div class="relative rounded-[1.75rem] overflow-hidden shadow-2xl aspect-[4/5] max-w-md mx-auto lg:mx-0">
+                        <img src="assets/aa11.jpg"
+                             alt="Inspector using thermal imaging equipment"
+                             class="w-full h-full object-cover"
+                             loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+                    </div>
+                    <!-- Overlapping accent panel -->
+                    <div class="absolute -bottom-6 left-2 sm:left-4 lg:-left-6 bg-accent text-white rounded-2xl p-5 sm:p-6 shadow-2xl max-w-[240px] sm:max-w-[260px]">
+                        <p class="text-3xl sm:text-4xl font-extrabold leading-none mb-1.5 sm:mb-2">400+</p>
+                        <p class="text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase opacity-85 leading-tight">Checklist points evaluated per inspection</p>
+                    </div>
+                </div>
+
+                <!-- Right: checklist with centered header & left-aligned items -->
+                <div class="order-1 lg:order-2 flex flex-col items-center lg:items-start text-center lg:text-left">
+                    <div class="inline-flex items-center gap-3 mb-4 justify-center lg:justify-start">
+                        <span class="h-px w-10 bg-accent"></span>
+                        <span class="text-accent text-[10px] font-bold tracking-[0.4em] uppercase">What's Covered</span>
+                        <span class="h-px w-10 bg-accent lg:hidden"></span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight mb-4 text-center lg:text-left max-w-xl" style="color: var(--text-primary);">A Complete Picture of the Property</h2>
+                    <p class="text-secondary text-sm sm:text-base leading-relaxed mb-8 text-center lg:text-left max-w-lg">
+                        Every inspection covers the systems that matter most — the ones that affect safety, structure, and long-term cost.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-3.5 sm:gap-y-4 w-full text-left">
+                        <div class="flex items-start gap-3 text-left">
+                            <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0"></span>
+                            <p class="text-xs sm:text-sm text-secondary leading-relaxed">Structural integrity &amp; foundation</p>
+                        </div>
+                        <div class="flex items-start gap-3 text-left">
+                            <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0"></span>
+                            <p class="text-xs sm:text-sm text-secondary leading-relaxed">Electrical panels &amp; wiring</p>
+                        </div>
+                        <div class="flex items-start gap-3 text-left">
+                            <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0"></span>
+                            <p class="text-xs sm:text-sm text-secondary leading-relaxed">Plumbing &amp; water supply</p>
+                        </div>
+                        <div class="flex items-start gap-3 text-left">
+                            <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0"></span>
+                            <p class="text-xs sm:text-sm text-secondary leading-relaxed">HVAC &amp; ventilation</p>
+                        </div>
+                        <div class="flex items-start gap-3 text-left">
+                            <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0"></span>
+                            <p class="text-xs sm:text-sm text-secondary leading-relaxed">Roof &amp; exterior envelope</p>
+                        </div>
+                        <div class="flex items-start gap-3 text-left">
+                            <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0"></span>
+                            <p class="text-xs sm:text-sm text-secondary leading-relaxed">Attic &amp; insulation</p>
+                        </div>
+                        <div class="flex items-start gap-3 text-left">
+                            <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0"></span>
+                            <p class="text-xs sm:text-sm text-secondary leading-relaxed">Windows &amp; doors</p>
+                        </div>
+                        <div class="flex items-start gap-3 text-left">
+                            <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0"></span>
+                            <p class="text-xs sm:text-sm text-secondary leading-relaxed">Safety systems &amp; detectors</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: HOW IT WORKS — Elegant numbered steps with dividers
+         ============================================================ -->
+    <section class="py-20 md:py-32" style="background: var(--card-bg);">
+        <div class="max-w-[96rem] mx-auto px-4 md:px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 md:mb-24">
+                <div class="inline-flex items-center gap-3 mb-6 justify-center">
+                    <span class="h-px w-10 bg-accent"></span>
+                    <span class="text-accent text-[10px] font-bold tracking-[0.4em] uppercase">The Process</span>
+                    <span class="h-px w-10 bg-accent"></span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="color: var(--text-primary);">From Booking to Report in 4 Steps</h2>
+                <p class="text-secondary text-sm sm:text-base leading-relaxed">
+                    A streamlined process built to respect your time — because closings wait for no one.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-6 max-w-5xl mx-auto">
+                <!-- Step 1 -->
+                <div class="text-center sm:text-left relative">
+                    <span class="text-6xl font-extrabold text-accent/15 block leading-none mb-4 tracking-tighter">01</span>
+                    <h3 class="text-base font-bold mb-2" style="color: var(--text-primary);">Book Online</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Choose your date, package, and property details through our secure portal.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="text-center sm:text-left relative">
+                    <span class="text-6xl font-extrabold text-accent/15 block leading-none mb-4 tracking-tighter">02</span>
+                    <h3 class="text-base font-bold mb-2" style="color: var(--text-primary);">On-Site Assessment</h3>
+                    <p class="text-xs text-secondary leading-relaxed">A certified inspector performs a non-invasive evaluation of all accessible systems.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="text-center sm:text-left relative">
+                    <span class="text-6xl font-extrabold text-accent/15 block leading-none mb-4 tracking-tighter">03</span>
+                    <h3 class="text-base font-bold mb-2" style="color: var(--text-primary);">Digital Report</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Receive a photo-rich PDF with severity ratings, typically within 24 hours.</p>
+                </div>
+                <!-- Step 4 -->
+                <div class="text-center sm:text-left relative">
+                    <span class="text-6xl font-extrabold text-accent/15 block leading-none mb-4 tracking-tighter">04</span>
+                    <h3 class="text-base font-bold mb-2" style="color: var(--text-primary);">Post-Report Support</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Call us with questions any time — we're here long after the inspection is over.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: PRICING PREVIEW — Three-tier card with premium middle
+         ============================================================ -->
+    <section class="py-20 md:py-32">
+        <div class="max-w-[96rem] mx-auto px-4 md:px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 md:mb-24">
+                <div class="inline-flex items-center gap-3 mb-6 justify-center">
+                    <span class="h-px w-10 bg-accent"></span>
+                    <span class="text-accent text-[10px] font-bold tracking-[0.4em] uppercase">Pricing</span>
+                    <span class="h-px w-10 bg-accent"></span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="color: var(--text-primary);">Transparent Packages</h2>
+                <p class="text-secondary text-sm sm:text-base leading-relaxed">
+                    Flat pricing based on square footage. No hidden fees — ever.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch">
+                <!-- Tier 1 -->
+                <div class="bg-card border border-border rounded-3xl p-7 flex flex-col justify-between h-full text-center hover:shadow-xl transition-shadow">
+                    <p class="text-[10px] tracking-[0.25em] uppercase text-accent font-bold mb-3">Essential</p>
+                    <p class="text-4xl font-extrabold mb-1" style="color: var(--text-primary);">$349<span class="text-sm font-normal text-secondary">+</span></p>
+                    <p class="text-xs text-secondary mb-6">Up to 1,500 sq ft</p>
+                    <ul class="text-sm text-secondary leading-relaxed space-y-2.5 mb-8 text-left flex-1">
+                        <li>· Full structural assessment</li>
+                        <li>· Electrical & plumbing</li>
+                        <li>· HVAC evaluation</li>
+                        <li>· Same-day digital report</li>
+                    </ul>
+                    <a href="pricing.html" class="btn-outline px-5 py-3 text-sm font-semibold w-full inline-flex justify-center mt-auto">Choose Essential</a>
+                </div>
+                <!-- Tier 2 (featured) -->
+                <div class="bg-card border-2 border-accent rounded-3xl p-7 flex flex-col justify-between h-full text-center shadow-2xl md:-mt-4 md:mb-4 relative">
+                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-white text-[10px] font-bold tracking-[0.2em] uppercase px-4 py-1.5 rounded-full">Recommended</span>
+                    <p class="text-[10px] tracking-[0.25em] uppercase text-accent font-bold mb-3 mt-2">Complete</p>
+                    <p class="text-4xl font-extrabold mb-1" style="color: var(--text-primary);">$499<span class="text-sm font-normal text-secondary">+</span></p>
+                    <p class="text-xs text-secondary mb-6">Up to 2,500 sq ft</p>
+                    <ul class="text-sm text-secondary leading-relaxed space-y-2.5 mb-8 text-left flex-1">
+                        <li>· Everything in Essential</li>
+                        <li>· Thermal imaging included</li>
+                        <li>· Roof & attic deep dive</li>
+                        <li>· Priority 12h report delivery</li>
+                        <li>· Post-report phone consult</li>
+                    </ul>
+                    <a href="pricing.html" class="btn-primary px-5 py-3 text-sm font-semibold w-full inline-flex justify-center mt-auto">Choose Complete</a>
+                </div>
+                <!-- Tier 3 -->
+                <div class="bg-card border border-border rounded-3xl p-7 flex flex-col text-center hover:shadow-xl transition-shadow">
+                    <p class="text-[10px] tracking-[0.25em] uppercase text-accent font-bold mb-3">Premium</p>
+                    <p class="text-4xl font-extrabold mb-1" style="color: var(--text-primary);">$699<span class="text-sm font-normal text-secondary">+</span></p>
+                    <p class="text-xs text-secondary mb-6">2,500+ sq ft</p>
+                    <ul class="text-sm text-secondary leading-relaxed space-y-2.5 mb-8 text-left flex-1">
+                        <li>· Everything in Complete</li>
+                        <li>· Sewer scope inspection</li>
+                        <li>· Mold & air quality test</li>
+                        <li>· 6-month follow-up check</li>
+                        <li>· Direct line to your inspector</li>
+                    </ul>
+                    <a href="pricing.html" class="btn-outline px-5 py-3 text-sm font-semibold w-full inline-flex justify-center mt-auto">Choose Premium</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: FINAL CTA — Centered accent panel
+         ============================================================ -->
+    <section class="pb-20 md:pb-28">
+        <div class="max-w-[96rem] mx-auto px-4 md:px-6">
+            <div class="relative rounded-[2rem] overflow-hidden bg-accent">
+                <div class="absolute inset-0 opacity-[0.08]">
+                    <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <pattern id="svcGridCta" width="8" height="8" patternUnits="userSpaceOnUse">
+                            <path d="M 8 0 L 0 0 0 8" fill="none" stroke="white" stroke-width="0.4"/>
+                        </pattern>
+                        <rect width="100" height="100" fill="url(#svcGridCta)"/>
+                    </svg>
+                </div>
+                <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-white/10 blur-3xl"></div>
+                <div class="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-black/10 blur-3xl"></div>
+
+                <div class="relative z-10 text-center px-6 py-16 md:py-24">
+                    <span class="inline-block text-[10px] font-bold tracking-[0.4em] uppercase text-white/60 mb-6">Not Sure Which Service?</span>
+                    <h2 class="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mb-5 max-w-2xl mx-auto leading-tight tracking-tight">
+                        Let's Find the Right Inspection for You
+                    </h2>
+                    <p class="text-white/80 text-sm sm:text-base leading-relaxed max-w-xl mx-auto mb-9">
+                        Tell us about the property and where you are in the process. We'll recommend the right assessment — no pressure, no upsell.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <a href="contact.html" class="bg-white text-accent font-bold px-9 py-3.5 rounded-full text-sm inline-flex items-center justify-center hover:bg-slate-100 transition-colors w-full sm:w-auto shadow-xl">
+                            Talk to an Inspector
+                        </a>
+                        <a href="tel:8005557655" class="border-2 border-white/50 text-white font-semibold px-9 py-3.5 rounded-full text-sm inline-flex items-center justify-center hover:bg-white/10 transition-colors w-full sm:w-auto">
+                            Call (800) 555-7655
+                        </a>
+                    </div>
+                    <p class="text-white/50 text-[11px] mt-7 tracking-wide">Licensed & Insured · 2,000+ Homes Assessed · 4.9 Average Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+    <!-- Footer -->
+    <footer class="pt-16 pb-8 border-t border-slate-800"
+        style="background: var(--footer-bg); color: var(--footer-text);">
+        <div class="max-w-7xl mx-auto px-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+            <div class="sm:col-span-2 lg:col-span-1">
+                <a href="index.html" class="inline-flex items-center gap-2.5 text-2xl font-bold tracking-tight text-accent" style="font-weight: 700 !important;">
+                    <span class="w-10 h-10 rounded-xl bg-accent text-white flex items-center justify-center shadow-md shadow-accent/25">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <path d="m9 12 2 2 4-4"></path>
+                        </svg>
+                    </span>
+                    <span class="text-accent tracking-tight font-extrabold text-xl">InspectGuard</span>
+                </a>
+                <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+                    Certified Home Inspection & Comprehensive Pre-Purchase Property Assessment. Uncovering structural, electrical, and plumbing risks before you invest.
+                </p>
+                <div class="mt-4 space-y-2 text-xs text-slate-300">
+                    <p class="flex items-center gap-2"><svg class="w-4.5 h-4.5 inline-block text-accent -mt-0.5" style="width: 1.15rem; height: 1.15rem;" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg> (800) 555-INSPECT</p>
+                    <p class="flex items-center gap-2"><i class="far fa-clock text-accent"></i> Mon - Sat: 8:00 AM - 7:00 PM</p>
+                </div>
+                <div class="flex gap-2.5 mt-5">
+                    <a href="#"
+                        class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-accent flex items-center justify-center transition-all duration-300 text-white"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="#"
+                        class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-accent flex items-center justify-center transition-all duration-300 text-white"><i
+                            class="fab fa-facebook-f text-sm"></i></a>
+                    <a href="#"
+                        class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-accent flex items-center justify-center transition-all duration-300 text-white"><i
+                            class="fab fa-x-twitter"></i></a>
+                    <a href="#"
+                        class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-accent flex items-center justify-center transition-all duration-300 text-white"><i
+                            class="fab fa-linkedin-in text-sm"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-medium text-sm tracking-wider uppercase text-white mb-4 whitespace-nowrap">Inspections</h4>
+                <ul class="text-xs space-y-2.5 text-slate-400">
+                    <li><a href="service.html"
+                            class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-200">Pre-Purchase Assessment</a></li>
+                    <li><a href="service.html"
+                            class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-200">Structural & Foundation</a></li>
+                    <li><a href="service.html"
+                            class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-200">Roof & Attic Inspection</a></li>
+                    <li><a href="service.html"
+                            class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-200">Electrical & HVAC Audit</a></li>
+                    <li><a href="service.html"
+                            class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-200">Thermal Imaging & Moisture</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-medium text-sm tracking-wider uppercase text-white mb-4 whitespace-nowrap">Support & Guides</h4>
+                <ul class="text-xs space-y-2.5 text-slate-400">
+                    <li><a href="contact.html"
+                            class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-200">Book Inspection</a></li>
+                    <li><a href="checklist.html"
+                            class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-200">Buyer's Checklist</a></li>
+                    <li><a href="checklist.html"
+                            class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-200">Sample Report PDF</a></li>
+                    <li><a href="contact.html"
+                            class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-200">Inspection FAQs</a></li>
+                    <li><a href="contact.html"
+                            class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-200">Customer Support</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-medium text-sm tracking-wider uppercase text-white mb-4 whitespace-nowrap">Company</h4>
+                <ul class="text-xs space-y-2.5 text-slate-400">
+                    <li><a href="about.html"
+                            class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-200">About Us</a></li>
+                    <li><a href="pricing.html"
+                            class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-200">Pricing Packages</a></li>
+                    <li><a href="signup.html"
+                            class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-200">Inspector Network</a></li>
+                    <li><a href="about.html"
+                            class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-200">Licensing & Certifications</a></li>
+                    <li><a href="contact.html"
+                            class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-200">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="sm:col-span-2 lg:col-span-1">
+                <h4 class="font-medium text-sm tracking-wider uppercase text-white mb-4 whitespace-nowrap">Inspection Advisory</h4>
+                <p class="text-xs text-slate-400 mb-3 leading-relaxed">
+                    Receive essential pre-closing inspection checklists, red-flag alerts, and home maintenance tips.
+                </p>
+                <form class="flex gap-2" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+                    <input type="email" placeholder="Your email address" required
+                        class="bg-slate-800 border border-slate-700 text-white text-xs rounded-lg px-3 py-2 w-full focus:outline-none focus:border-accent transition-colors">
+                    <button type="submit"
+                        class="bg-accent text-white px-3 py-2 rounded-lg text-xs font-medium hover:opacity-90 transition-opacity"><i
+                            class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div
+            class="max-w-7xl mx-auto px-5 mt-12 pt-6 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+            <p>© 2026 InspectGuard • Home Inspection & Pre-Purchase Assessment. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="contact.html" class="hover:text-accent transition-colors">Privacy Policy</a>
+                <a href="contact.html" class="hover:text-accent transition-colors">Terms of Service</a>
+                <a href="contact.html" class="hover:text-accent transition-colors">Inspection Standards</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            const html = document.documentElement;
+            // Theme toggles
+            const themeBtn = document.getElementById('theme-toggle'), mobileTheme = document.getElementById('mobile-theme-btn');
+            const applyTheme = (theme) => { html.setAttribute('data-theme', theme); localStorage.setItem('theme', theme); document.querySelectorAll('.light-icon').forEach(icon => icon.classList.toggle('hidden', theme === 'dark')); document.querySelectorAll('.dark-icon').forEach(icon => icon.classList.toggle('hidden', theme === 'light')); };
+            const initTheme = () => { const stored = localStorage.getItem('theme'); const prefers = window.matchMedia('(prefers-color-scheme: dark)').matches; applyTheme(stored === 'dark' || (!stored && prefers) ? 'dark' : 'light'); };
+            const toggleTheme = () => { const cur = html.getAttribute('data-theme'); applyTheme(cur === 'light' ? 'dark' : 'light'); };
+            themeBtn?.addEventListener('click', toggleTheme); if (mobileTheme) mobileTheme.addEventListener('click', toggleTheme);
+            initTheme();
+            // RTL
+            const langBtn = document.getElementById('lang-icon'), mobileRtl = document.getElementById('mobile-rtl-btn');
+            const toggleRtl = () => { const isRtl = html.getAttribute('dir') === 'rtl'; html.setAttribute('dir', isRtl ? 'ltr' : 'rtl'); localStorage.setItem('dir', isRtl ? 'ltr' : 'rtl'); };
+            if (langBtn) langBtn.addEventListener('click', toggleRtl);
+            if (mobileRtl) mobileRtl.addEventListener('click', toggleRtl);
+            const savedDir = localStorage.getItem('dir') === 'rtl' ? 'rtl' : 'ltr'; html.setAttribute('dir', savedDir);
+            // dropdowns desktop
+            document.querySelectorAll('.dropdown-wrapper').forEach(drop => {
+                const btn = drop.querySelector('.dropdown-toggle');
+                if (window.innerWidth >= 1280) {
+                    drop.addEventListener('mouseenter', () => drop.classList.add('open'));
+                    drop.addEventListener('mouseleave', () => drop.classList.remove('open'));
+                } else {
+                    btn?.addEventListener('click', (e) => { e.preventDefault(); drop.classList.toggle('open'); });
+                }
+            });
+            document.addEventListener('click', (e) => { if (!e.target.closest('.dropdown-wrapper')) document.querySelectorAll('.dropdown-wrapper').forEach(d => d.classList.remove('open')); });
+            // Mobile drawer
+            const drawer = document.getElementById('mobile-drawer'), backdrop = document.getElementById('drawer-backdrop'), panel = document.getElementById('drawer-panel'), openBtn = document.getElementById('mobile-menu-open'), closeBtn = document.getElementById('drawer-close');
+            const openDrawer = () => { drawer.classList.remove('pointer-events-none'); panel.classList.remove('-translate-x-full'); backdrop.classList.add('opacity-100', 'pointer-events-auto'); document.body.style.overflow = 'hidden'; };
+            const closeDrawer = () => { panel.classList.add('-translate-x-full'); backdrop.classList.remove('opacity-100', 'pointer-events-auto'); setTimeout(() => drawer.classList.add('pointer-events-none'), 300); document.body.style.overflow = ''; };
+            openBtn?.addEventListener('click', openDrawer); closeBtn?.addEventListener('click', closeDrawer); backdrop?.addEventListener('click', closeDrawer);
+            document.getElementById('mobile-home-toggle')?.addEventListener('click', () => { document.getElementById('mobile-home-submenu')?.classList.toggle('hidden'); });
+            document.getElementById('mobile-dashboard-toggle')?.addEventListener('click', () => { document.getElementById('mobile-dashboard-submenu')?.classList.toggle('hidden'); });
+            // reveal animation
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); }); }, { threshold: 0.15 });
+            reveals.forEach(r => observer.observe(r));
+            // Add active nav based on hash
+            const navLinks = document.querySelectorAll('.nav-link, .dropdown-menu a, #mobile-drawer a');
+            navLinks.forEach(link => { link.addEventListener('click', function (e) { if (this.getAttribute('href')?.startsWith('#')) e.preventDefault(); window.location.hash = this.getAttribute('href')?.slice(1) || ''; }); });
+
+            // Dynamic Active Page Highlighter (Desktop & Mobile)
+            const currentPath = window.location.pathname;
+            let rawPage = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+            if (!rawPage || rawPage === '/' || rawPage === '') rawPage = 'index.html';
+            const currentPage = rawPage.toLowerCase();
+
+            // 1. Clean slate: clear all hardcoded active classes
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            document.querySelectorAll('.dropdown-toggle').forEach(link => link.classList.remove('active'));
+            document.querySelectorAll('.dropdown-menu a').forEach(link => link.classList.remove('text-accent', 'font-medium'));
+            
+            const mobileDrawer = document.getElementById('mobile-drawer');
+            if (mobileDrawer) {
+                mobileDrawer.querySelectorAll('a').forEach(link => {
+                    link.classList.remove('active', 'text-accent', 'font-medium');
+                });
+                mobileDrawer.querySelectorAll('button').forEach(btn => {
+                    btn.classList.remove('text-accent');
+                });
+                // Reset submenus to hidden
+                const dbSub = document.getElementById('mobile-dashboard-submenu');
+                if (dbSub) dbSub.classList.add('hidden');
+                const homeSub = document.getElementById('mobile-home-submenu');
+                if (homeSub) homeSub.classList.add('hidden');
+            }
+
+            // 2. Desktop Highlighting
+            let desktopMatched = false;
+            document.querySelectorAll('.dropdown-menu a').forEach(link => {
+                const href = (link.getAttribute('href') || '').toLowerCase();
+                if (href === currentPage) {
+                    link.classList.add('text-accent', 'font-medium');
+                    const wrapper = link.closest('.dropdown-wrapper');
+                    if (wrapper) {
+                        const toggle = wrapper.querySelector('.dropdown-toggle');
+                        if (toggle) toggle.classList.add('active');
+                    }
+                    desktopMatched = true;
+                }
+            });
+
+            if (!desktopMatched) {
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    const wrapper = link.closest('.dropdown-wrapper');
+                    if (!wrapper) {
+                        const href = (link.getAttribute('href') || '').toLowerCase();
+                        if (href === currentPage) {
+                            link.classList.add('active');
+                            desktopMatched = true;
+                        }
+                    }
+                });
+            }
+
+            // 3. Mobile Highlighting
+            if (mobileDrawer) {
+                let mobileMatched = false;
+                mobileDrawer.querySelectorAll('a').forEach(link => {
+                    const href = (link.getAttribute('href') || '').toLowerCase();
+                    if (href === currentPage) {
+                        link.classList.add('active');
+                        if (!link.classList.contains('rounded-full')) {
+                            link.classList.add('text-accent', 'font-medium');
+                        }
+                        
+                        // Handle parents/submenus
+                        const homeSubmenu = document.getElementById('mobile-home-submenu');
+                        const dashboardSubmenu = document.getElementById('mobile-dashboard-submenu');
+                        
+                        if (homeSubmenu && homeSubmenu.contains(link)) {
+                            const homeToggle = document.getElementById('mobile-home-toggle');
+                            if (homeToggle) homeToggle.classList.add('text-accent');
+                            homeSubmenu.classList.remove('hidden');
+                        } else if (dashboardSubmenu && dashboardSubmenu.contains(link)) {
+                            const dashboardToggle = document.getElementById('mobile-dashboard-toggle');
+                            if (dashboardToggle) dashboardToggle.classList.add('text-accent');
+                            dashboardSubmenu.classList.remove('hidden');
+                        }
+                        mobileMatched = true;
+                    }
+                });
+
+                // Fallback for root / index.html
+                if (!mobileMatched && (currentPage === 'index.html' || currentPage === 'home2.html')) {
+                    const homeToggle = document.getElementById('mobile-home-toggle');
+                    if (homeToggle) homeToggle.classList.add('text-accent');
+                    const homeSubmenu = document.getElementById('mobile-home-submenu');
+                    if (homeSubmenu) homeSubmenu.classList.remove('hidden');
+                    
+                    const matchingLink = mobileDrawer.querySelector(`a[href="${currentPage}"]`);
+                    if (matchingLink) {
+                        matchingLink.classList.add('active', 'text-accent', 'font-medium');
+                    }
+                }
+            }
+        })();
+    </script>
+    <!-- home2.html redirect simulation: if path includes home2.html, just update theme but fully functional -->
+    <script>
+        // MOCK support for home2 version (just stays same design but content identical, but we respect current page path)
+        if (window.location.pathname.includes('home2.html')) { document.title = "TorqueSwift | Performance Pro Edition"; }
+    </script>
+</body>
+
+</html>
