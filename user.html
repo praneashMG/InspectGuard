@@ -148,8 +148,14 @@
       transition: width 0.3s ease;
     }
     .status-badge {
-      padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.7rem;
+      padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.7rem;
       font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+      white-space: nowrap !important;
+      word-break: keep-all !important;
+      display: inline-block;
+      text-align: center;
+      line-height: 1.2;
+      flex-shrink: 0;
     }
     .status-badge.active { background-color: var(--success); color: white; }
     .status-badge.pending { background-color: var(--warning); color: white; }
@@ -299,14 +305,14 @@
         <!-- OVERVIEW / DASHBOARD -->
         <div id="overview" class="user-section">
           <div class="dashboard-card p-5 sm:p-7 reveal active mb-6 bg-accent-gradient text-white">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <div>
                 <h2 class="text-2xl sm:text-3xl font-semibold mb-2">🏠 Welcome back, Sarah</h2>
                 <p class="text-white/80 text-sm">Track your home inspection, view findings, and download your report.</p>
               </div>
-              <div class="flex gap-3">
-                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider">Today · Apr 09, 2026</span>
-                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider flex items-center gap-1"><i class="fas fa-circle text-success text-[6px]"></i> Inspection Complete</span>
+              <div class="flex flex-wrap gap-2.5 sm:gap-3">
+                <span class="bg-white/20 backdrop-blur-sm px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-semibold uppercase tracking-wider whitespace-nowrap">Today · Apr 09, 2026</span>
+                <span class="bg-white/20 backdrop-blur-sm px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 whitespace-nowrap"><i class="fas fa-circle text-success text-[7px]"></i> Inspection Complete</span>
               </div>
             </div>
           </div>
@@ -395,13 +401,41 @@
               <div class="flex gap-3"><button class="px-6 py-3 btn-primary text-xs font-semibold uppercase tracking-widest"><i class="fas fa-plus mr-1"></i> Book New</button></div>
             </div>
             <div class="space-y-4">
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center"><i class="fas fa-home text-accent text-xl"></i></div><div><p class="font-semibold">42 Maple Grove Ln · Pre-Purchase</p><p class="text-xs text-secondary mt-1">Apr 09, 2026 · 3,200 sq.ft · Single Family</p><div class="flex gap-3 mt-1 text-xs text-secondary"><span><i class="far fa-check-circle text-success"></i> Inspection complete</span><span><i class="fas fa-user-tie"></i> M. Torres</span></div></div></div>
-                <div><span class="status-badge pending">Report Drafting</span></div>
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                  <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
+                    <i class="fas fa-home text-accent text-xl"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <p class="font-semibold text-sm sm:text-base truncate">42 Maple Grove Ln · Pre-Purchase</p>
+                    <p class="text-xs text-secondary mt-0.5">Apr 09, 2026 · 3,200 sq.ft · Single Family</p>
+                    <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-xs text-secondary">
+                      <span><i class="far fa-check-circle text-success"></i> Inspection complete</span>
+                      <span><i class="fas fa-user-tie"></i> M. Torres</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="self-end sm:self-center shrink-0">
+                  <span class="status-badge pending">Report Drafting</span>
+                </div>
               </div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center"><i class="fas fa-building text-accent text-xl"></i></div><div><p class="font-semibold">18 Harbour View · Condo Inspection</p><p class="text-xs text-secondary mt-1">Mar 21, 2026 · 1,100 sq.ft · Condo</p><div class="flex gap-3 mt-1 text-xs text-secondary"><span><i class="far fa-check-circle text-success"></i> Report delivered</span><span><i class="fas fa-user-tie"></i> S. Park</span></div></div></div>
-                <div><span class="status-badge completed">Completed</span></div>
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                  <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
+                    <i class="fas fa-building text-accent text-xl"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <p class="font-semibold text-sm sm:text-base truncate">18 Harbour View · Condo Inspection</p>
+                    <p class="text-xs text-secondary mt-0.5">Mar 21, 2026 · 1,100 sq.ft · Condo</p>
+                    <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-xs text-secondary">
+                      <span><i class="far fa-check-circle text-success"></i> Report delivered</span>
+                      <span><i class="fas fa-user-tie"></i> S. Park</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="self-end sm:self-center shrink-0">
+                  <span class="status-badge completed">Completed</span>
+                </div>
               </div>
             </div>
             <div class="mt-6 p-4 bg-hover rounded-2xl text-sm"><i class="fas fa-info-circle text-accent mr-2"></i> You can book a follow-up inspection or a specialist assessment at any time.</div>
@@ -413,13 +447,27 @@
           <div class="dashboard-card p-5 sm:p-7 reveal active">
             <h2 class="text-xl sm:text-2xl font-semibold text-primary mb-8 flex items-center gap-2"><span class="text-accent">📄</span> Inspection Reports</h2>
             <div class="space-y-4">
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div><p class="font-semibold">42 Maple Grove Ln · Full Inspection Report</p><p class="text-xs text-secondary">Apr 09, 2026 · InterNACHI SOP · 450+ checkpoints</p><p class="text-xs text-accent mt-1"><i class="fas fa-clock"></i> Estimated delivery: Today, 6:00 PM</p></div>
-                <div class="flex gap-2"><span class="status-badge pending">Drafting</span><button class="text-secondary cursor-not-allowed"><i class="fas fa-download"></i></button></div>
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0">
+                  <p class="font-semibold text-sm sm:text-base">42 Maple Grove Ln · Full Inspection Report</p>
+                  <p class="text-xs text-secondary mt-0.5">Apr 09, 2026 · InterNACHI SOP · 450+ checkpoints</p>
+                  <p class="text-xs text-accent mt-1"><i class="fas fa-clock"></i> Estimated delivery: Today, 6:00 PM</p>
+                </div>
+                <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
+                  <span class="status-badge pending">Drafting</span>
+                  <button class="text-secondary p-1 cursor-not-allowed" title="Drafting"><i class="fas fa-download"></i></button>
+                </div>
               </div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div><p class="font-semibold">18 Harbour View · Condo Inspection Report</p><p class="text-xs text-secondary">Mar 21, 2026 · Full systems evaluation</p><p class="text-xs text-accent mt-1"><i class="fas fa-check-circle"></i> Delivered Mar 21, 2026</p></div>
-                <div class="flex gap-2"><span class="status-badge completed">Delivered</span><button class="text-accent"><i class="fas fa-download"></i></button></div>
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0">
+                  <p class="font-semibold text-sm sm:text-base">18 Harbour View · Condo Inspection Report</p>
+                  <p class="text-xs text-secondary mt-0.5">Mar 21, 2026 · Full systems evaluation</p>
+                  <p class="text-xs text-accent mt-1"><i class="fas fa-check-circle"></i> Delivered Mar 21, 2026</p>
+                </div>
+                <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
+                  <span class="status-badge completed">Delivered</span>
+                  <button class="text-accent p-1 hover:opacity-80 transition" title="Download report"><i class="fas fa-download"></i></button>
+                </div>
               </div>
             </div>
             <div class="mt-6 p-4 bg-hover rounded-2xl text-sm"><i class="fas fa-info-circle text-accent mr-2"></i> Reports include high-resolution photos, thermal imaging captures, and severity-tagged findings.</div>

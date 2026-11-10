@@ -147,8 +147,14 @@
       transition: width 0.3s ease;
     }
     .status-badge {
-      padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.7rem;
+      padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.7rem;
       font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+      white-space: nowrap !important;
+      word-break: keep-all !important;
+      display: inline-block;
+      text-align: center;
+      line-height: 1.2;
+      flex-shrink: 0;
     }
     .status-badge.active { background-color: var(--success); color: white; }
     .status-badge.pending { background-color: var(--warning); color: white; }
@@ -293,14 +299,14 @@
         <!-- OVERVIEW / DASHBOARD -->
         <div id="overview" class="admin-section">
           <div class="dashboard-card p-5 sm:p-7 reveal active mb-6 bg-accent-gradient text-white">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <div>
                 <h2 class="text-2xl sm:text-3xl font-semibold mb-2">🏠 Inspection Overview, James</h2>
-                <p class="text-white/80 text-sm">Real-time inspection queue, report status & team performance.</p>
+                <p class="text-white/80 text-sm">Real-time inspection queue, report status &amp; team performance.</p>
               </div>
-              <div class="flex gap-3">
-                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider">Today · Apr 09, 2026</span>
-                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider flex items-center gap-1"><i class="fas fa-circle text-success text-[6px]"></i> Operational</span>
+              <div class="flex flex-wrap gap-2.5 sm:gap-3">
+                <span class="bg-white/20 backdrop-blur-sm px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-semibold uppercase tracking-wider whitespace-nowrap">Today · Apr 09, 2026</span>
+                <span class="bg-white/20 backdrop-blur-sm px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 whitespace-nowrap"><i class="fas fa-circle text-success text-[7px]"></i> Operational</span>
               </div>
             </div>
           </div>
@@ -372,17 +378,59 @@
               <div class="flex gap-3"><button class="px-6 py-3 btn-primary text-xs font-semibold uppercase tracking-widest"><i class="fas fa-filter mr-1"></i> Filter</button></div>
             </div>
             <div class="space-y-4">
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center"><i class="fas fa-home text-accent text-xl"></i></div><div><p class="font-semibold">42 Maple Grove Ln · Pre-Purchase</p><p class="text-xs text-secondary mt-1">10:00 AM · 3,200 sq.ft · Single Family</p><div class="flex gap-3 mt-1 text-xs text-secondary"><span><i class="far fa-check-circle text-success"></i> Inspector en route</span><span><i class="fas fa-user-tie"></i> M. Torres</span></div></div></div>
-                <div><span class="status-badge scheduled">En Route</span></div>
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                  <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
+                    <i class="fas fa-home text-accent text-xl"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <p class="font-semibold text-sm sm:text-base truncate">42 Maple Grove Ln · Pre-Purchase</p>
+                    <p class="text-xs text-secondary mt-0.5">10:00 AM · 3,200 sq.ft · Single Family</p>
+                    <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-xs text-secondary">
+                      <span><i class="far fa-check-circle text-success"></i> Inspector en route</span>
+                      <span><i class="fas fa-user-tie"></i> M. Torres</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="self-end sm:self-center shrink-0">
+                  <span class="status-badge scheduled">En Route</span>
+                </div>
               </div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center"><i class="fas fa-building text-accent text-xl"></i></div><div><p class="font-semibold">18 Harbour View · Condo Inspection</p><p class="text-xs text-secondary mt-1">11:30 AM · 1,100 sq.ft · Condo</p><div class="flex gap-3 mt-1 text-xs text-secondary"><span><i class="far fa-clock text-warning"></i> Awaiting access</span><span><i class="fas fa-user-tie"></i> S. Park</span></div></div></div>
-                <div><span class="status-badge pending">Pending</span></div>
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                  <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
+                    <i class="fas fa-building text-accent text-xl"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <p class="font-semibold text-sm sm:text-base truncate">18 Harbour View · Condo Inspection</p>
+                    <p class="text-xs text-secondary mt-0.5">11:30 AM · 1,100 sq.ft · Condo</p>
+                    <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-xs text-secondary">
+                      <span><i class="far fa-clock text-warning"></i> Awaiting access</span>
+                      <span><i class="fas fa-user-tie"></i> S. Park</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="self-end sm:self-center shrink-0">
+                  <span class="status-badge pending">Pending</span>
+                </div>
               </div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center"><i class="fas fa-house-chimney text-accent text-xl"></i></div><div><p class="font-semibold">7 Birchwood Ct · Full Inspection</p><p class="text-xs text-secondary mt-1">2:00 PM · 2,800 sq.ft · Single Family</p><div class="flex gap-3 mt-1 text-xs text-secondary"><span><i class="far fa-check-circle text-success"></i> Confirmed</span><span><i class="fas fa-user-tie"></i> J. Whitfield</span></div></div></div>
-                <div><span class="status-badge completed">Confirmed</span></div>
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                  <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
+                    <i class="fas fa-house-chimney text-accent text-xl"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <p class="font-semibold text-sm sm:text-base truncate">7 Birchwood Ct · Full Inspection</p>
+                    <p class="text-xs text-secondary mt-0.5">2:00 PM · 2,800 sq.ft · Single Family</p>
+                    <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-xs text-secondary">
+                      <span><i class="far fa-check-circle text-success"></i> Confirmed</span>
+                      <span><i class="fas fa-user-tie"></i> J. Whitfield</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="self-end sm:self-center shrink-0">
+                  <span class="status-badge completed">Confirmed</span>
+                </div>
               </div>
             </div>
           </div>
@@ -391,19 +439,40 @@
         <!-- CLIENTS & AGENTS -->
         <div id="clients" class="admin-section hidden">
           <div class="dashboard-card p-5 sm:p-7 reveal active">
-            <h2 class="text-xl sm:text-2xl font-semibold text-primary mb-8 flex items-center gap-2"><span class="text-accent">👥</span> Clients & Real Estate Agents</h2>
+            <h2 class="text-xl sm:text-2xl font-semibold text-primary mb-8 flex items-center gap-2"><span class="text-accent">👥</span> Clients &amp; Real Estate Agents</h2>
             <div class="space-y-4">
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div><p class="font-semibold">Sarah & David Miller · Homebuyers</p><p class="text-xs text-secondary">Inspection: 42 Maple Grove Ln · Apr 09, 2026</p><p class="text-xs text-accent mt-1"><i class="fas fa-user-tie"></i> Agent: Rebecca Lane, Keller Williams</p></div>
-                <div class="flex gap-2"><span class="status-badge active">Active</span><button class="text-accent"><i class="fas fa-eye"></i></button></div>
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0">
+                  <p class="font-semibold text-sm sm:text-base">Sarah &amp; David Miller · Homebuyers</p>
+                  <p class="text-xs text-secondary mt-0.5">Inspection: 42 Maple Grove Ln · Apr 09, 2026</p>
+                  <p class="text-xs text-accent mt-1"><i class="fas fa-user-tie"></i> Agent: Rebecca Lane, Keller Williams</p>
+                </div>
+                <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
+                  <span class="status-badge active">Active</span>
+                  <button class="text-accent p-1 hover:opacity-80 transition" title="View details"><i class="fas fa-eye"></i></button>
+                </div>
               </div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div><p class="font-semibold">Harbour View Condos · Property Manager</p><p class="text-xs text-secondary">Inspection: 18 Harbour View · Apr 09, 2026</p><p class="text-xs text-accent mt-1"><i class="fas fa-building"></i> Managed by: Coastal Realty Group</p></div>
-                <div class="flex gap-2"><span class="status-badge completed">Scheduled</span><button class="text-accent"><i class="fas fa-eye"></i></button></div>
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0">
+                  <p class="font-semibold text-sm sm:text-base">Harbour View Condos · Property Manager</p>
+                  <p class="text-xs text-secondary mt-0.5">Inspection: 18 Harbour View · Apr 09, 2026</p>
+                  <p class="text-xs text-accent mt-1"><i class="fas fa-building"></i> Managed by: Coastal Realty Group</p>
+                </div>
+                <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
+                  <span class="status-badge completed">Scheduled</span>
+                  <button class="text-accent p-1 hover:opacity-80 transition" title="View details"><i class="fas fa-eye"></i></button>
+                </div>
               </div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div><p class="font-semibold">Emily Chen · Buyer's Agent</p><p class="text-xs text-secondary">Inspection: 7 Birchwood Ct · Apr 09, 2026</p><p class="text-xs text-accent mt-1"><i class="fas fa-user-tie"></i> Agency: Compass Real Estate</p></div>
-                <div class="flex gap-2"><span class="status-badge active">Active</span><button class="text-accent"><i class="fas fa-eye"></i></button></div>
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0">
+                  <p class="font-semibold text-sm sm:text-base">Emily Chen · Buyer's Agent</p>
+                  <p class="text-xs text-secondary mt-0.5">Inspection: 7 Birchwood Ct · Apr 09, 2026</p>
+                  <p class="text-xs text-accent mt-1"><i class="fas fa-user-tie"></i> Agency: Compass Real Estate</p>
+                </div>
+                <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
+                  <span class="status-badge active">Active</span>
+                  <button class="text-accent p-1 hover:opacity-80 transition" title="View details"><i class="fas fa-eye"></i></button>
+                </div>
               </div>
             </div>
             <div class="mt-6 p-4 bg-hover rounded-2xl text-sm"><i class="fas fa-info-circle text-accent mr-2"></i> Client records include inspection agreements, payment status, and report delivery preferences.</div>
