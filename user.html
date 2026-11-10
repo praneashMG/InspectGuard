@@ -201,38 +201,38 @@
 
   <!-- TOP BAR -->
   <header class="border-b border-border bg-card sticky top-0 z-50 w-full">
-    <div class="max-w-[1920px] mx-auto px-2 sm:px-6 lg:px-10 py-3 flex items-center justify-between gap-1 sm:gap-3">
+    <div class="max-w-[1920px] mx-auto px-3 sm:px-6 lg:px-10 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-3">
       <!-- Hamburger + Brand -->
-      <div class="flex items-center gap-1 sm:gap-3">
-        <button id="mobile-menu-toggle" class="xl:hidden p-1.5 sm:p-2 -ml-1 sm:-ml-2 rounded-xl hover:bg-hover transition text-primary">
+      <div class="flex items-center gap-1.5 sm:gap-3 min-w-0">
+        <button id="mobile-menu-toggle" class="xl:hidden p-2 -ml-1 rounded-xl hover:bg-hover transition text-primary flex-shrink-0" aria-label="Toggle Navigation Menu">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
-        <div class="flex items-center gap-2 flex-shrink-0">
+        <div class="flex items-center gap-2 min-w-0 flex-shrink-0">
           <a href="index.html" class="flex items-center gap-2 shrink-0 group">
-            <span class="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-accent text-white shadow-lg shadow-accent/25 group-hover:scale-110 transition-transform">
+            <span class="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-accent text-white shadow-lg shadow-accent/25 group-hover:scale-110 transition-transform flex-shrink-0">
               <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                 <path d="m9 12 2 2 4-4"></path>
               </svg>
             </span>
             <div class="leading-tight">
-              <span class="block text-lg sm:text-xl font-extrabold tracking-tight text-accent">InspectGuard</span>
-              <span class="block text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-accent/70">My Inspection Portal</span>
+              <span class="block text-base sm:text-xl font-extrabold tracking-tight text-accent whitespace-nowrap">InspectGuard</span>
+              <span class="block text-[8px] sm:text-[10px] font-bold uppercase tracking-wider text-accent/70 whitespace-nowrap">My Inspection Portal</span>
             </div>
           </a>
         </div>
       </div>
       <!-- User Utilities -->
-      <div class="flex items-center gap-1 sm:gap-4 shrink-0 rtl:flex-row-reverse">
+      <div class="flex items-center gap-1 sm:gap-3 shrink-0 rtl:flex-row-reverse">
         <div class="hidden md:flex items-center bg-hover rounded-full px-4 py-2 border border-border w-32 sm:w-40 lg:w-auto overflow-hidden">
           <i class="fas fa-search text-secondary text-sm mr-2"></i>
           <input type="text" placeholder="Search reports..." class="bg-transparent border-none outline-none text-sm w-48 text-primary placeholder-secondary/50">
         </div>
-        <button id="lang-toggle" class="p-1.5 sm:p-2 rounded-full hover:bg-hover transition text-primary"><i class="fas fa-exchange-alt"></i></button>
-        <button id="theme-toggle-user" class="p-1.5 sm:p-2 rounded-full hover:bg-hover transition text-primary"><i class="fas fa-moon"></i></button>
+        <button id="lang-toggle" class="p-1.5 sm:p-2 rounded-full hover:bg-hover transition text-primary" title="Toggle Language"><i class="fas fa-exchange-alt text-sm"></i></button>
+        <button id="theme-toggle-user" class="p-1.5 sm:p-2 rounded-full hover:bg-hover transition text-primary" title="Toggle Theme"><i class="fas fa-moon text-sm"></i></button>
         <div class="relative">
-          <button class="p-1.5 sm:p-2 rounded-full hover:bg-hover transition text-primary relative">
-            <i class="fas fa-bell"></i>
+          <button class="p-1.5 sm:p-2 rounded-full hover:bg-hover transition text-primary relative" title="Notifications">
+            <i class="fas fa-bell text-sm"></i>
             <span class="absolute top-1 right-1 w-2 h-2 bg-danger rounded-full"></span>
           </button>
         </div>
@@ -256,7 +256,7 @@
   <div id="mobile-overlay" class="xl:hidden"></div>
 
   <!-- MAIN LAYOUT -->
-  <main class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-10 py-6 h-[calc(100vh-64px)] w-full relative">
+  <main class="max-w-[1920px] mx-auto px-3 sm:px-6 lg:px-10 py-4 sm:py-6 h-[calc(100vh-60px)] sm:h-[calc(100vh-64px)] w-full relative">
     <div class="flex flex-col xl:flex-row gap-4 xl:gap-6 xl:gap-10 h-full">
 
       <!-- SIDEBAR -->
@@ -395,10 +395,12 @@
 
         <!-- MY INSPECTIONS -->
         <div id="inspections" class="user-section hidden">
-          <div class="dashboard-card p-5 sm:p-7 reveal active">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-              <h2 class="text-xl sm:text-2xl font-semibold text-primary flex items-center gap-2"><span class="text-accent">📋</span> My Inspections</h2>
-              <div class="flex gap-3"><button class="px-6 py-3 btn-primary text-xs font-semibold uppercase tracking-widest"><i class="fas fa-plus mr-1"></i> Book New</button></div>
+          <div class="dashboard-card p-4 sm:p-7 reveal active">
+            <div class="flex flex-row justify-between items-center gap-3 mb-6 sm:mb-8">
+              <h2 class="text-lg sm:text-2xl font-semibold text-primary flex items-center gap-2"><span class="text-accent">📋</span> <span>My Inspections</span></h2>
+              <div class="flex gap-2 sm:gap-3 flex-shrink-0">
+                <button class="px-4 sm:px-6 py-2 sm:py-3 btn-primary text-xs font-semibold uppercase tracking-widest inline-flex items-center gap-1.5"><i class="fas fa-plus text-[10px]"></i> <span>Book New</span></button>
+              </div>
             </div>
             <div class="space-y-4">
               <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
@@ -519,13 +521,37 @@
 
         <!-- RESOURCES -->
         <div id="resources" class="user-section hidden">
-          <div class="dashboard-card p-5 sm:p-7 reveal active">
-            <h2 class="text-xl sm:text-2xl font-semibold text-primary mb-8 flex items-center gap-2"><span class="text-accent">📚</span> Homeowner Resources</h2>
+          <div class="dashboard-card p-4 sm:p-7 reveal active">
+            <h2 class="text-xl sm:text-2xl font-semibold text-primary mb-6 sm:mb-8 flex items-center gap-2"><span class="text-accent">📚</span> Homeowner Resources</h2>
             <div class="space-y-3">
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl"><div class="flex items-center gap-3"><i class="fas fa-list-check text-accent text-lg"></i><span class="font-medium">Pre-Closing Inspection Checklist</span></div><span class="text-xs text-secondary">PDF guide</span></div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl"><div class="flex items-center gap-3"><i class="fas fa-snowflake text-accent text-lg"></i><span class="font-medium">Seasonal Home Maintenance Calendar</span></div><span class="text-xs text-secondary">12-month plan</span></div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl"><div class="flex items-center gap-3"><i class="fas fa-temperature-high text-accent text-lg"></i><span class="font-medium">Understanding Thermal Imaging Results</span></div><span class="text-xs text-secondary">Explainer</span></div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl"><div class="flex items-center gap-3"><i class="fas fa-video text-accent text-lg"></i><span class="font-medium">Video Library · What Inspectors Look For</span></div><span class="text-xs text-secondary">18 videos</span></div>
+              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <i class="fas fa-list-check text-accent text-lg shrink-0"></i>
+                  <span class="font-medium text-sm sm:text-base truncate">Pre-Closing Inspection Checklist</span>
+                </div>
+                <span class="text-xs text-secondary shrink-0 whitespace-nowrap">PDF guide</span>
+              </div>
+              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <i class="fas fa-snowflake text-accent text-lg shrink-0"></i>
+                  <span class="font-medium text-sm sm:text-base truncate">Seasonal Home Maintenance Calendar</span>
+                </div>
+                <span class="text-xs text-secondary shrink-0 whitespace-nowrap">12-month plan</span>
+              </div>
+              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <i class="fas fa-temperature-high text-accent text-lg shrink-0"></i>
+                  <span class="font-medium text-sm sm:text-base truncate">Understanding Thermal Imaging Results</span>
+                </div>
+                <span class="text-xs text-secondary shrink-0 whitespace-nowrap">Explainer</span>
+              </div>
+              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <i class="fas fa-video text-accent text-lg shrink-0"></i>
+                  <span class="font-medium text-sm sm:text-base truncate">Video Library · What Inspectors Look For</span>
+                </div>
+                <span class="text-xs text-secondary shrink-0 whitespace-nowrap">18 videos</span>
+              </div>
             </div>
           </div>
         </div>
