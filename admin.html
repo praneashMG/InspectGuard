@@ -196,33 +196,39 @@
 
   <!-- TOP BAR -->
   <header class="border-b border-border bg-card sticky top-0 z-50 w-full">
-    <div class="max-w-[1920px] mx-auto px-3 sm:px-6 lg:px-10 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-3">
+    <div class="max-w-[1920px] mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
       <!-- Hamburger + Brand -->
-      <div class="flex items-center gap-1.5 sm:gap-3 min-w-0">
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
         <button id="mobile-menu-toggle" class="xl:hidden p-2 -ml-1 rounded-xl hover:bg-hover transition text-primary flex-shrink-0" aria-label="Toggle Navigation Menu">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
-        <div class="flex items-center gap-2 min-w-0 flex-shrink-0">
-          <a href="index.html" class="flex items-center gap-2 shrink-0 group">
-            <span class="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-accent text-white shadow-lg shadow-accent/25 group-hover:scale-110 transition-transform flex-shrink-0">
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <path d="m9 12 2 2 4-4"></path>
-              </svg>
-            </span>
-            <div class="leading-tight">
-              <span class="block text-base sm:text-xl font-extrabold tracking-tight text-accent whitespace-nowrap">InspectGuard</span>
-              <span class="block text-[8px] sm:text-[10px] font-bold uppercase tracking-wider text-accent/70 whitespace-nowrap">Home Inspection · Admin</span>
-            </div>
-          </a>
-        </div>
+        <a href="index.html" class="flex items-center gap-2.5 shrink-0 group">
+          <span class="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-accent text-white shadow-lg shadow-accent/25 group-hover:scale-105 transition-transform flex-shrink-0">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <path d="m9 12 2 2 4-4"></path>
+            </svg>
+          </span>
+          <div class="leading-tight">
+            <span class="block text-base sm:text-lg lg:text-xl font-extrabold tracking-tight text-accent whitespace-nowrap">InspectGuard</span>
+            <span class="hidden sm:block text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-accent/70 whitespace-nowrap">Home Inspection · Admin</span>
+          </div>
+        </a>
       </div>
+
       <!-- Admin Utilities -->
-      <div class="flex items-center gap-1 sm:gap-3 shrink-0 rtl:flex-row-reverse">
-        <div class="hidden md:flex items-center bg-hover rounded-full px-4 py-2 border border-border w-32 sm:w-40 lg:w-auto overflow-hidden">
-          <i class="fas fa-search text-secondary text-sm mr-2"></i>
-          <input type="text" placeholder="Search inspections..." class="bg-transparent border-none outline-none text-sm w-48 text-primary placeholder-secondary/50">
+      <div class="flex items-center gap-1.5 sm:gap-2.5 lg:gap-3 shrink-0 rtl:flex-row-reverse">
+        <!-- Desktop Search Bar -->
+        <div class="hidden lg:flex items-center bg-hover rounded-full px-3.5 py-1.5 lg:py-2 border border-border w-44 xl:w-60 focus-within:w-72 focus-within:border-accent transition-all duration-200 overflow-hidden">
+          <i class="fas fa-search text-secondary text-sm mr-2 shrink-0"></i>
+          <input type="text" placeholder="Search inspections..." class="bg-transparent border-none outline-none text-sm w-full text-primary placeholder-secondary/50">
         </div>
+
+        <!-- Mobile / Tab Search Toggle Button -->
+        <button id="search-toggle-btn" class="lg:hidden p-1.5 sm:p-2 rounded-full hover:bg-hover transition text-primary" title="Search" aria-label="Toggle Search">
+          <i class="fas fa-search text-sm"></i>
+        </button>
+
         <button id="lang-toggle" class="p-1.5 sm:p-2 rounded-full hover:bg-hover transition text-primary" title="Toggle Language"><i class="fas fa-exchange-alt text-sm"></i></button>
         <button id="theme-toggle-user" class="p-1.5 sm:p-2 rounded-full hover:bg-hover transition text-primary" title="Toggle Theme"><i class="fas fa-moon text-sm"></i></button>
         <div class="relative">
@@ -231,18 +237,26 @@
             <span class="absolute top-1 right-1 w-2 h-2 bg-danger rounded-full"></span>
           </button>
         </div>
-        <div class="relative flex items-center gap-1.5 sm:gap-2 pl-1.5 sm:pl-3 border-l border-border rtl:border-l-0 rtl:border-r min-w-0">
+        <div class="relative flex items-center gap-2 pl-2 sm:pl-3 border-l border-border rtl:border-l-0 rtl:border-r shrink-0">
           <div class="relative flex-shrink-0">
             <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-accent/10 border border-accent flex items-center justify-center text-accent font-semibold">
-              <i class="fas fa-user-shield text-xs"></i>
+              <i class="fas fa-user-shield text-xs sm:text-sm"></i>
             </div>
             <span class="absolute bottom-0 right-0 status-pulse"></span>
           </div>
-          <div class="hidden sm:block text-sm">
-            <p class="font-semibold leading-none">James Whitfield</p>
-            <p class="text-[10px] text-secondary mt-1 uppercase tracking-widest font-semibold">Admin · Master Inspector</p>
+          <div class="hidden md:block text-left">
+            <p class="font-semibold text-xs sm:text-sm leading-none truncate max-w-[110px] xl:max-w-none">James Whitfield</p>
+            <p class="text-[10px] text-secondary mt-1 uppercase tracking-widest font-semibold hidden xl:block">Admin · Master Inspector</p>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Mobile / Tab Search Bar (Collapsible) -->
+    <div id="mobile-search-bar" class="hidden px-4 py-2.5 bg-card border-t border-border lg:hidden transition-all duration-200">
+      <div class="flex items-center bg-hover rounded-full px-4 py-2 border border-border w-full">
+        <i class="fas fa-search text-secondary text-sm mr-2 shrink-0"></i>
+        <input type="text" placeholder="Search inspections..." class="bg-transparent border-none outline-none text-sm w-full text-primary placeholder-secondary/50">
       </div>
     </div>
   </header>
@@ -613,10 +627,10 @@
         <div id="pricing" class="admin-section hidden">
           <div class="dashboard-card p-5 sm:p-7 reveal active">
             <h2 class="text-xl sm:text-2xl font-semibold text-primary mb-8 flex items-center gap-2"><span class="text-accent">🏷️</span> Pricing Configuration</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-              <div class="p-6 bg-hover rounded-2xl text-center"><h3 class="font-bold text-lg">Condo & Apartment</h3><p class="text-3xl font-bold text-accent mt-2">$349</p><p class="text-xs text-secondary">/ up to 1,200 sq.ft</p><ul class="text-sm mt-4 space-y-1"><li>✓ Electrical & plumbing</li><li>✓ In-unit HVAC</li><li>✓ Infrared moisture scan</li></ul></div>
-              <div class="p-6 bg-accent text-white rounded-2xl text-center shadow-xl"><h3 class="font-bold text-lg">Single Family Home</h3><p class="text-3xl font-bold mt-2">$499</p><p class="text-xs text-white/70">/ up to 2,500 sq.ft</p><ul class="text-sm mt-4 space-y-1"><li>✓ 450+ point inspection</li><li>✓ Drone roof scan</li><li>✓ Crawlspace & attic</li></ul></div>
-              <div class="p-6 bg-hover rounded-2xl text-center"><h3 class="font-bold text-lg">Estate & Pre-1960</h3><p class="text-3xl font-bold text-accent mt-2">$699</p><p class="text-xs text-secondary">/ up to 4,000 sq.ft</p><ul class="text-sm mt-4 space-y-1"><li>✓ 2 master inspectors</li><li>✓ Sewer scope camera</li><li>✓ 90-day warranty</li></ul></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
+              <div class="p-5 sm:p-6 bg-hover rounded-2xl text-center"><h3 class="font-bold text-lg">Condo & Apartment</h3><p class="text-3xl font-bold text-accent mt-2">$349</p><p class="text-xs text-secondary">/ up to 1,200 sq.ft</p><ul class="text-sm mt-4 space-y-1"><li>✓ Electrical & plumbing</li><li>✓ In-unit HVAC</li><li>✓ Infrared moisture scan</li></ul></div>
+              <div class="p-5 sm:p-6 bg-accent text-white rounded-2xl text-center shadow-xl"><h3 class="font-bold text-lg">Single Family Home</h3><p class="text-3xl font-bold mt-2">$499</p><p class="text-xs text-white/70">/ up to 2,500 sq.ft</p><ul class="text-sm mt-4 space-y-1"><li>✓ 450+ point inspection</li><li>✓ Drone roof scan</li><li>✓ Crawlspace & attic</li></ul></div>
+              <div class="p-5 sm:p-6 bg-hover rounded-2xl text-center"><h3 class="font-bold text-lg">Estate & Pre-1960</h3><p class="text-3xl font-bold text-accent mt-2">$699</p><p class="text-xs text-secondary">/ up to 4,000 sq.ft</p><ul class="text-sm mt-4 space-y-1"><li>✓ 2 master inspectors</li><li>✓ Sewer scope camera</li><li>✓ 90-day warranty</li></ul></div>
             </div>
             <div class="mt-6 p-4 bg-hover rounded-2xl text-sm"><i class="fas fa-info-circle text-accent mr-2"></i> Pricing updates require admin approval and are reflected on the public site within 5 minutes.</div>
           </div>
@@ -653,18 +667,40 @@
       'use strict';
       const htmlEl = document.documentElement;
 
-      // ----- 1. MOBILE MENU -----
+      // ----- 1. MOBILE MENU & SEARCH -----
       const menuToggle = document.getElementById('mobile-menu-toggle');
       const closeSidebar = document.getElementById('close-sidebar');
       const sidebar = document.getElementById('sidebar-container');
       const overlay = document.getElementById('mobile-overlay');
+      const searchToggleBtn = document.getElementById('search-toggle-btn');
+      const mobileSearchBar = document.getElementById('mobile-search-bar');
+
       function toggleMobileMenu(isOpen) {
-        if (isOpen) { sidebar.classList.remove('-translate-x-full'); overlay.classList.add('active'); document.body.classList.toggle('overflow-hidden', isOpen); }
-        else { sidebar.classList.add('-translate-x-full'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+        if (isOpen) {
+          sidebar.classList.remove('-translate-x-full');
+          sidebar.classList.add('translate-x-0');
+          overlay.classList.add('active');
+          document.body.classList.toggle('overflow-hidden', isOpen);
+        } else {
+          sidebar.classList.remove('translate-x-0');
+          sidebar.classList.add('-translate-x-full');
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
       }
       if (menuToggle) menuToggle.addEventListener('click', () => toggleMobileMenu(true));
       if (closeSidebar) closeSidebar.addEventListener('click', () => toggleMobileMenu(false));
       if (overlay) overlay.addEventListener('click', () => toggleMobileMenu(false));
+
+      if (searchToggleBtn && mobileSearchBar) {
+        searchToggleBtn.addEventListener('click', () => {
+          mobileSearchBar.classList.toggle('hidden');
+          if (!mobileSearchBar.classList.contains('hidden')) {
+            const input = mobileSearchBar.querySelector('input');
+            if (input) input.focus();
+          }
+        });
+      }
 
       // ----- 2. THEME -----
       const themeBtn = document.getElementById('theme-toggle-user');
@@ -697,7 +733,7 @@
         const activeEl = document.getElementById(sectionId);
         if (activeEl) { activeEl.classList.remove('hidden'); activeEl.classList.add('active'); }
         sidebarLinks.forEach(link => { link.classList.remove('active'); if (link.dataset.section === sectionId) link.classList.add('active'); });
-        if (window.innerWidth < 1024) { toggleMobileMenu(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        if (window.innerWidth < 1280) { toggleMobileMenu(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }
       };
       sidebarLinks.forEach(link => { link.addEventListener('click', function(e) { e.preventDefault(); const section = this.dataset.section; if (section) activateSection(section); }); });
       activateSection('overview');
